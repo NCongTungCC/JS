@@ -11,3 +11,6 @@ Vòng lặp là một cấu trúc trong lập trình cho phép thực hiện m�
 4. **Vòng lặp `for...in`**: Sử dụng để lặp qua các thuộc tính liệt kê được của một đối tượng.
 
 5. **Vòng lặp `for...of`**: Sử dụng để lặp qua các giá trị của một đối tượng có thể lặp, như mảng, chuỗi, hoặc `Map`.
+
+### chạy lệnh thực hành 
+node ./Javascript/loop/loop.js

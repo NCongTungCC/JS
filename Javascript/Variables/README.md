@@ -1,4 +1,4 @@
-# Lý thuyết về biến
+### Lý thuyết về biến
 
 Biến trong JS dùng để lưu trữ dữ liệu. Biến có thể được khai báo bằng từ khóa var, let hoặc const.
 
@@ -10,6 +10,6 @@ const được sử dụng để khai báo các biến không thể thay đổi 
 
 Hosting là ta có thể sử dụng trước khi khai báo nó
 
-# chạy thực hành 
+### chạy thực hành 
 
 node ./Javascript/Variables/variables.js
