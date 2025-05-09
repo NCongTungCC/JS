@@ -33,4 +33,4 @@ function letconst() {
 }
 letconst();
 
-console.log(c); // lỗi cục bộ không thể truy cập bên ngoài
+// console.log(c); // lỗi cục bộ không thể truy cập bên ngoài

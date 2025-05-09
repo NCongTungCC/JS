@@ -1,14 +1,21 @@
-Có 6 kiểu dữ liệu cơ bản
+# Lý thuyết về kiểu dữ liệu
+
+Có 7 kiểu dữ liệu cơ bản
 
 Number : số
 String : chuỗi
 Boolean : đúng sai
-null 
-undefined
-symbol
+null : giá trị rỗng
+undefined : chưa được gán giá trị
+BigInt : số nguyên lớn
+symbol : biểu tượng duy nhất
 
-3 kiểu dữ liệu phức tạp 
+Kiểu dữ liệu tham chiếu
 
-array
-function
-object
+Object : đối tượng
+Array : mảng
+Function : hàm
+
+# chạy thực hành 
+
+node ./Javascript/DataType/dataType.js
