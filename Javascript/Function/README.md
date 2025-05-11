@@ -31,3 +31,7 @@ Hàm (function) trong JavaScript có thể được khai báo theo 3 cách phổ
       - Không có `arguments` object.
 
     **Khi nào dùng:** Sử dụng khi cần viết các hàm ngắn gọn, đặc biệt trong các hàm callback hoặc các hàm không cần ngữ cảnh `this`.
+
+### chạy TH
+
+ node ./Javascript/Function/function.js        

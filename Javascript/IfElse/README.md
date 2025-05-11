@@ -26,3 +26,7 @@ if (điều_kiện) {
     // Khối mã được thực thi nếu điều kiện sai
 }
 ```
+
+### chạy TH
+
+node ./Javascript/IfElse/ifElse.js
