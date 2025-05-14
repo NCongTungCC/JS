@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "inquirer": "^8.2.6",
+    "install": "^0.13.0",
+    "requirer": "^0.0.4"
+  }
+}

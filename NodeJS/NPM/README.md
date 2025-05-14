@@ -9,3 +9,14 @@
 - **Tạo và xuất bản gói**: Hỗ trợ tạo và xuất bản các gói của riêng bạn lên NPM Registry.
 
 NPM là một công cụ mạnh mẽ giúp tăng hiệu quả phát triển và quản lý dự án Node.js.
+
+### NPX là gì?
+
+**NPX** là một công cụ đi kèm với NPM (từ phiên bản 5.2.0 trở lên) và được sử dụng để thực thi các gói Node.js mà không cần cài đặt chúng toàn cục. Điều này giúp tiết kiệm thời gian và không làm lộn xộn hệ thống với các gói không cần thiết.
+
+### Các tính năng chính của NPX:
+- **Chạy các gói trực tiếp**: Thực thi các gói mà không cần cài đặt chúng toàn cục.
+- **Phiên bản cụ thể**: Cho phép chạy một phiên bản cụ thể của gói.
+- **Tự động tải xuống**: Tự động tải xuống và thực thi gói nếu nó chưa được cài đặt.
+
+NPX rất hữu ích trong việc thử nghiệm các gói hoặc chạy các công cụ CLI mà không cần thêm chúng vào dự án.
