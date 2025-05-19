@@ -75,7 +75,4 @@ hello(hello2);
 
 
 const hello3 = function() {
-  console.log('Hello');
-}
-
-
+  console.log('Hello');}
