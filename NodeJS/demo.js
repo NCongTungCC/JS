@@ -553,7 +553,9 @@ console.log(string.toLowerCase().split(" ").join("-"));
 const aaa = [1,2,3,4,5];
 
 const bbb = [3,4,5,6,7];
-
+if(aaa.filter((item) => !bbb.includes(item)).length == 0){
+  console.log("2 mảng giống nhau")
+} else console.log("khác")
 console.log([...(aaa.filter((item) => !bbb.includes(item))), ...(bbb.filter((item) => !aaa.includes(item)))]);
 
 let inputa = [
@@ -970,4 +972,403 @@ console.log(urll.split("&").reduce((obj, item) => {
     const [key, value] = item.split('=');
     obj[key] = value;
     return obj;
+},{}))
+
+const salas = [
+  { product: "iPhone", date: "2023-01-15", amount: 5000000 },
+  { product: "MacBook", date: "2023-02-20", amount: 25000000 },
+  { product: "iPad", date: "2023-03-10", amount: 8000000 },
+  { product: "iPhone", date: "2023-04-05", amount: 5500000 },
+  { product: "MacBook", date: "2023-05-15", amount: 28000000 },
+  { product: "iPad", date: "2023-06-20", amount: 7500000 },
+  { product: "iPhone", date: "2023-07-12", amount: 6000000 },
+  { product: "MacBook", date: "2023-08-25", amount: 30000000 },
+  { product: "iPad", date: "2023-09-18", amount: 9000000 },
+  { product: "iPhone", date: "2023-10-30", amount: 5800000 },
+  { product: "MacBook", date: "2023-11-15", amount: 26000000 },
+  { product: "iPad", date: "2023-12-05", amount: 8500000 }
+];
+
+// Yêu cầu: Tính tổng doanh thu theo từng quý và theo sản phẩm
+// Kết quả:
+// {
+//   "Q1": { total: 38000000, products: { iPhone: 5000000, MacBook: 25000000, iPad: 8000000 } },
+//   "Q2": { total: 41000000, products: { iPhone: 5500000, MacBook: 28000000, iPad: 7500000 } },
+//   "Q3": { total: 45000000, products: { iPhone: 6000000, MacBook: 30000000, iPad: 9000000 } },
+//   "Q4": { total: 40300000, products: { iPhone: 5800000, MacBook: 26000000, iPad: 8500000 } }
+// }
+
+console.log(salas.reduce((group,item) => {
+    const [year, month, day] = item.date.split("-");
+    var quy = null;
+    if(month >= 1 && month <= 3) {
+        quy = "Q1";
+    } else if(month >= 4 && month <= 6) {
+        quy = "Q2";
+    } else if(month >= 7 && month <= 9) {
+        quy = "Q3";
+    } else quy = "Q4";
+    if(!group[quy]) {
+        group[quy] = {}
+    }
+    group[quy]["total"] = (group[quy]["total"] || 0) + item.amount;
+    if(!group[quy]["products"]) {
+        group[quy]["products"] = {};
+    }
+    group[quy]["products"][item.product] = (group[quy]["products"][item.product] || 0) + item.amount;
+    return group;
+},{}))
+
+const logs = [
+  { timestamp: "2023-03-15T13:45:00", level: "ERROR", message: "Failed to connect to database", source: "app-server" },
+  { timestamp: "2023-03-15T13:45:30", level: "INFO", message: "User login successful", source: "auth-service" },
+  { timestamp: "2023-03-15T13:46:00", level: "WARN", message: "High memory usage detected", source: "app-server" },
+  { timestamp: "2023-03-15T13:47:00", level: "ERROR", message: "API request timeout", source: "api-gateway" },
+  { timestamp: "2023-03-15T13:47:30", level: "INFO", message: "Cache cleared successfully", source: "cache-service" },
+  { timestamp: "2023-03-15T13:48:00", level: "ERROR", message: "Failed to process payment", source: "payment-service" },
+  { timestamp: "2023-03-15T13:49:00", level: "DEBUG", message: "Processing request", source: "app-server" }
+];
+
+// Yêu cầu 1: Đếm số log theo level (ERROR, INFO, WARN, DEBUG)
+// Yêu cầu 2: Tìm các service có lỗi (level ERROR)
+// Yêu cầu 3: Tạo bộ lọc logs theo source và level
+
+console.log(logs.reduce((group,item) => {
+    const key = item.level;
+    group[key] = (group[key] || 0) + 1;
+    return group;
+},{}))
+
+console.log(logs.filter((item) => {
+    const [header, body] = item.source.split("-");
+    return item.level == "ERROR" && body == "service"
+}));
+
+const findlog = (level, source) => {
+      console.log(logs.filter((item) => item.level == level || item.source == source))
+}
+
+findlog("DEBUG", "app-server");
+
+const studentScores = [
+  { studentId: 1, name: "An", semester: "HK1", subject: "Math", score: 8.5 },
+  { studentId: 1, name: "An", semester: "HK1", subject: "Physics", score: 7.5 },
+  { studentId: 1, name: "An", semester: "HK1", subject: "Chemistry", score: 9.0 },
+  { studentId: 1, name: "An", semester: "HK2", subject: "Math", score: 9.0 },
+  { studentId: 1, name: "An", semester: "HK2", subject: "Physics", score: 8.0 },
+  { studentId: 1, name: "An", semester: "HK2", subject: "Chemistry", score: 8.5 },
+  { studentId: 2, name: "Bình", semester: "HK1", subject: "Math", score: 7.5 },
+  { studentId: 2, name: "Bình", semester: "HK1", subject: "Physics", score: 8.5 },
+  { studentId: 2, name: "Bình", semester: "HK1", subject: "Chemistry", score: 7.0 },
+  { studentId: 2, name: "Bình", semester: "HK2", subject: "Math", score: 8.0 },
+  { studentId: 2, name: "Bình", semester: "HK2", subject: "Physics", score: 9.0 },
+  { studentId: 2, name: "Bình", semester: "HK2", subject: "Chemistry", score: 8.5 }
+];
+
+// Yêu cầu: Tính điểm trung bình theo học sinh và học kỳ
+// Kết quả:
+// [
+//   { studentId: 1, name: "An", semesterAverages: { HK1: 8.33, HK2: 8.5 }, overallAverage: 8.42 },
+//   { studentId: 2, name: "Bình", semesterAverages: { HK1: 7.67, HK2: 8.5 }, overallAverage: 8.08 }
+// ]
+
+const studentid = studentScores.reduce((group,item) => {
+    let count = 1;
+    const key = item.studentId;
+    if(!group[key]) {
+        group[key] = [];
+    }
+    group[key].push(item);
+    return group;
+},{});
+let diem = []
+for(const key in studentid) {
+    let sum1 = 0;
+    let sum2 = 0;
+    let count1 = 0;
+    let count2 = 0;
+    const information = studentid[key].reduce((group,item) => {
+        const semester = item.semester;
+        if(semester == "HK1") {
+            sum1 = sum1 + item.score;
+            count1++;
+        } else {
+            sum2 = sum2 + item.score;
+            count2++;
+        }
+        const HK1 = sum1 / count1;
+        const HK2 = sum2 / count2;
+        group["studentId"] = key;
+        group["name"] = item.name;
+        group["overallAverage"] = ((group["overallAverage"] || 0) + item.score / studentid[key].length)
+        group["semesterAverages"] = {HK1 : HK1.toFixed(2), HK2 : HK2.toFixed(1)};
+        return group;
+    },{})
+    diem.push(information);
+}
+console.log(diem);
+
+const shoppingCarts = [
+  { userId: 1, items: [
+    { productId: 1, name: "iPhone", price: 20000000, quantity: 1 },
+    { productId: 2, name: "AirPods", price: 4000000, quantity: 1 },
+    { productId: 3, name: "Ốp lưng", price: 200000, quantity: 2 }
+  ]},
+  { userId: 2, items: [
+    { productId: 1, name: "iPhone", price: 20000000, quantity: 1 },
+    { productId: 4, name: "iPad", price: 15000000, quantity: 1 }
+  ]},
+  { userId: 3, items: [
+    { productId: 5, name: "MacBook", price: 35000000, quantity: 1 },
+    { productId: 2, name: "AirPods", price: 4000000, quantity: 2 },
+  ]}
+];
+
+// Yêu cầu 1: Tính tổng giá trị giỏ hàng của mỗi user
+// Yêu cầu 2: Thống kê sản phẩm bán chạy nhất (dựa trên số lượng)
+// Yêu cầu 3: Tính tổng doanh thu
+
+console.log(shoppingCarts.map((item) => {
+    const price = item.items.reduce((sum, suu) => sum + suu.price*suu.quantity,0);
+    return {userId : item.userId, avg : price};
+}))
+
+const quan = shoppingCarts.map((item) => {
+    const quantity = item.items.reduce((products, product) => {
+        const key = product.productId;
+        products[key] = (products[key] || 0) + product.quantity;
+        return products;
+    },{})
+    return quantity;
+});
+
+console.log(quan.reduce((group,item) => {
+      for(const key in item) {
+          if(!group[key]) {
+              group[key] = 0;
+          }
+          group[key] = group[key] + item[key];
+      }
+      return group;
+}))
+
+const hotelBookings = [
+  { id: 1, roomType: "Standard", checkIn: "2023-10-01", checkOut: "2023-10-05", guestCount: 2, totalAmount: 4000000 },
+  { id: 2, roomType: "Deluxe", checkIn: "2023-10-02", checkOut: "2023-10-07", guestCount: 3, totalAmount: 10000000 },
+  { id: 3, roomType: "Suite", checkIn: "2023-10-01", checkOut: "2023-10-10", guestCount: 2, totalAmount: 25000000 },
+  { id: 4, roomType: "Standard", checkIn: "2023-10-05", checkOut: "2023-10-07", guestCount: 1, totalAmount: 2000000 },
+  { id: 5, roomType: "Deluxe", checkIn: "2023-10-10", checkOut: "2023-10-15", guestCount: 4, totalAmount: 12500000 }
+];
+
+// Yêu cầu 1: Tính số ngày lưu trú trung bình theo loại phòng
+// Yêu cầu 2: Tính doanh thu trung bình mỗi ngày trong tháng 10/2023
+// Yêu cầu 3: Tìm giao dịch đặt phòng có giá trị trung bình/ngày cao nhất
+
+const roomType = hotelBookings.reduce((group,item) => {
+    const key = item.roomType;
+    const [yearIn, monthIn, dayIn] = item.checkIn.split("-");
+    const [yearOut, monthOut, dayOut] = item.checkOut.split("-");
+    if(!group[key]) {
+        group[key] = []
+    }
+    group[key].push({...item, live : dayOut - dayIn});
+    return group;
+},{})
+const room = [];
+for(const key in roomType) {
+    const avg = roomType[key].reduce((sum,item) => sum + item.live,0) / roomType[key].length;
+    room.push({roomType : key, avg : avg});
+}
+console.log(room);
+
+const numbe = [1, 2, 2, 3, 4, 4, 5, 5];
+
+console.log(numbe.reduce((group,item) => {
+    const result = group.some((tem) => tem == item);
+    if(!result) {
+        group.push(item);
+    }
+    return group;
+},[]))
+
+const departments = [
+    { id: 1, name: "Engineering" },
+    { id: 2, name: "Marketing" },
+    { id: 3, name: "HR" }
+];
+
+const employees = [
+    { id: 101, name: "Alice", departmentId: 1, salary: 5000 },
+    { id: 102, name: "Bob", departmentId: 2, salary: 4500 },
+    { id: 103, name: "Charlie", departmentId: 1, salary: 5500 },
+    { id: 104, name: "David", departmentId: 3, salary: 4000 },
+    { id: 105, name: "Eve", departmentId: 1, salary: 5200 },
+    { id: 106, name: "Frank", departmentId: 2, salary: 4800 }
+];
+// Viết code để tạo cấu trúc dữ liệu thể hiện mỗi phòng ban với danh sách nhân viên
+// và thống kê (số lượng nhân viên, tổng lương, mức lương trung bình, nhân viên lương cao nhất)
+const dep = departments.reduce((group,item) => {
+    const key = item.id;
+    if(!group[key]) {
+        group[key] = {};
+    }
+    group[key] = item;
+    return group;
+},{})
+
+const emp = employees.reduce((group,item) => {
+    const key = item.departmentId;
+    if(!group[key]) {
+        group[key] = [];
+    }
+    group[key].push(item);
+    return group;
+},{})
+console.log(emp);
+const cod = [];
+for(const key in dep) {
+    const item = {...dep[key], emp: emp[key] || []}
+    cod.push(item);
+}
+console.log(cod);
+
+const frontendSkills = ["HTML", "CSS", "JavaScript", "React", "Vue"];
+const backendSkills = ["Node.js", "Express", "MongoDB", "SQL", "JavaScript"];
+const candidates = [
+    { id: 1, name: "An", skills: ["HTML", "CSS", "JavaScript", "React"] },
+    { id: 2, name: "Bình", skills: ["JavaScript", "Node.js", "Express", "MongoDB"] },
+    { id: 3, name: "Chi", skills: ["HTML", "CSS", "JavaScript", "Node.js"] },
+    { id: 4, name: "Dũng", skills: ["React", "Vue", "JavaScript"] }
+];
+
+// Viết code để phân loại ứng viên:
+// 1. Ứng viên frontend (có ít nhất 3 kỹ năng frontend)
+// 2. Ứng viên backend (có ít nhất 3 kỹ năng backend)
+// 3. Ứng viên fullstack (có ít nhất 2 kỹ năng frontend và 2 kỹ năng backend)
+// 4. Ứng viên không đạt yêu cầu
+
+const skill = candidates.map((item) => {
+    return {...item, frontend : item.skills.filter((item) => frontendSkills.includes(item)).length, backend : item.skills.filter((item) => backendSkills.includes(item)).length}
+})
+
+console.log(skill.reduce((group,item) => {
+    let key = "khong dat";
+    if(item.backend >= 2 && item.frontend >= 2) {
+       key = "full stack"} 
+    else if(item.frontend >= 3) {
+        key = "frontend" }
+      else if(item.backend >= 3) {
+        key = "backend"
+    }
+    if(!group[key]) {
+        group[key] = [];
+    }
+    group[key].push(item);
+    return group;
+},{}))
+
+const numbrs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+
+const snt = (n) => {
+    if(n <= 2) {
+      return true;
+    }
+    for(let i = 2; i < n;i++) {
+        if(n % i == 0) {
+           return false;
+        }
+    }
+    return true;
+}
+const findsnt = (start,end,snt) => {
+    const st = [];
+    for(let i = start ; i <= end;i++) {
+        if(snt(i)) {
+            st.push(i);
+        }
+    }
+    console.log(st);
+}
+findsnt(10,50,snt);
+console.log(numbrs.filter((item) => snt(item)));
+
+const number = 12345;
+console.log(number.toString().split("").map((item) => Number(item)).reduce((sum, item) => sum = sum + item,0))
+
+const numbersaa = [1, 3, 4, 5, 6, 8, 9, 10];
+const tarrget = 14;
+const mangaa = [];
+
+for(let i = 0;i<numbersaa.length;i++) {
+  for(let j = i+1;j<numbersaa.length;j++) {
+      if(numbersaa[i] + numbersaa[j] == tarrget) {
+          mangaa.push([numbersaa[i],numbersaa[j]])
+      }
+  }
+}
+
+console.log(mangaa);
+
+const numrs = [1, 2, 3, 2, 1, 3, 3, 4, 2, 2];
+
+const oj = {};
+
+for(const item of numrs) {
+    oj[item] = (oj[item] || 0) + 1;
+}
+console.log(oj);
+
+const numes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const chunkSize = 3;
+const manb = [];
+
+while(numes.length > 0) {   
+    manb.push(numes.slice(0, chunkSize));
+    numes.splice(0,chunkSize);
+}
+console.log(manb);
+
+const nus = [1, 2, 3, 5, 6, 7, 8, 9, 10];
+
+for(let i = 1; i<= 10;i++) {
+    const result = nus.some((item) => item == i);
+    if(!result) {
+      console.log(i);
+    }
+}
+
+const stc = [
+  { name: "Alice", grade: "A" },
+  { name: "Bob", grade: "B" },
+  { name: "Charlie", grade: "A" },
+  { name: "David", grade: "C" },
+  { name: "Emma", grade: "B" },
+  { name: "Frank", grade: "A" }
+];
+
+console.log(stc.reduce((group,item) => {
+    const key = item.grade;
+    if(!group[key]) {
+        group[key] = {
+            grade: key,
+            students: [],
+            count : 0,
+        }
+    }
+    group[key]["students"].push(item);
+    group[key]["count"] = group[key]["count"] + 1;
+    return group;
+},{}))
+
+const words = ["apple", "banana", "car", "dog", "elephant", "fox", "grapes", "hi"];
+// Viết code để nhóm các từ theo độ dài
+// Kết quả: { 2: ["hi"], 3: ["car", "dog", "fox"], 5: ["apple"], 6: ["banana", "grapes"], 8: ["elephant"] }
+
+console.log(words.reduce((group,item) => {
+    const key = item.length;
+    if(!group[key]) {
+        group[key] = [];
+    }
+    group[key].push(item);
+    return group;
 },{}))
