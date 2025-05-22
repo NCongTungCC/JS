@@ -1372,3 +1372,214 @@ console.log(words.reduce((group,item) => {
     group[key].push(item);
     return group;
 },{}))
+
+const salData = [
+  {
+    store: "Store A", 
+    date: "2023-01-15", 
+    products: [
+      { category: "Electronics", name: "iPhone", price: 20000000, quantity: 5 },
+      { category: "Electronics", name: "Laptop", price: 25000000, quantity: 2 },
+      { category: "Clothing", name: "T-shirt", price: 500000, quantity: 10 }
+    ]
+  },
+  {
+    store: "Store B", 
+    date: "2023-01-15", 
+    products: [
+      { category: "Electronics", name: "iPhone", price: 20000000, quantity: 3 },
+      { category: "Furniture", name: "Chair", price: 2000000, quantity: 6 }
+    ]
+  },
+  {
+    store: "Store A", 
+    date: "2023-02-10", 
+    products: [
+      { category: "Electronics", name: "MacBook", price: 35000000, quantity: 1 },
+      { category: "Clothing", name: "Jeans", price: 800000, quantity: 7 }
+    ]
+  }
+];
+
+// Viết code để tạo báo cáo phân tích:
+// 1. Doanh thu theo cửa hàng, theo tháng, theo danh mục sản phẩm
+// 2. Sản phẩm bán chạy nhất của mỗi cửa hàng
+// 3. Tỷ lệ đóng góp doanh thu của mỗi danh mục sản phẩm
+const sol = salData.reduce((group,item) => {
+    const key = item.store;
+    if(!group[key]) {
+        group[key] = {
+            store : key,
+            salesStore : 0,
+            salesMonth : {},
+            salesCategory : {},
+            products : {}
+    }}
+    const [year, month, day] = item.date.split("-");
+    const mont = month;
+    group[key]["salesStore"] = group[key]["salesStore"] + item.products.reduce((sum,item) => sum + item.price*item.quantity,0);
+    group[key]["salesMonth"][mont] = (group[key]["salesMonth"][mont] || 0) + item.products.reduce((sum,item) => sum + item.price*item.quantity,0)
+    item.products.forEach((sp) => {
+        const id = sp.category;
+        group[key]["salesCategory"][id] = (group[key]["salesCategory"][id] || 0) + sp.price*sp.quantity;
+    })
+    
+    return group;
+},[])
+
+console.log(sol);
+
+const aray = [1, 2, 3,3, 2, 4];
+
+function palin(aray) {
+for(let i = 0; i < aray.length -1 /2;i++) {
+    if(aray[i] !== aray[aray.length - i -1])
+    {
+      return false;
+    }
+}
+return true;
+}
+
+if(palin(aray)) {
+    console.log("dx");
+} else console.log("k");
+let nnm = 153;
+const moc = nnm;
+let sunn = 0;
+function isArmstrongNumber(num) {
+  // Code của bạn
+  const length = num.toString().split("").length;
+  while(num !== 0) {
+      const du = num % 10;
+      sunn = sunn + Math.pow(du,length);
+       num = Math.floor(num / 10);
+  }
+  return sunn;
+}
+console.log(isArmstrongNumber(nnm));
+
+const ya = [5, 2, 9, 1, 7, 4, 8, 3, 6];
+
+for(let i = 0; i< ya.length;i++) {
+  for(let j = i +1;j<ya.length; j++) {
+    if(ya[i] > ya[j]) {
+       const trunggian = ya[i];
+       ya[i] = ya[j];
+       ya[j] = trunggian;
+    }
+  }
+}
+
+console.log(ya);
+
+for(let i = 0; i< ya.length;i++) {
+  for(let j = i +1;j<ya.length; j++) {
+    if(ya[i] < ya[j]) {
+       const trunggian = ya[i];
+       ya[i] = ya[j];
+       ya[j] = trunggian;
+    }
+  }
+}
+console.log(ya);
+
+const nuus = [1, 2, 2, 3, 4, 4, 5, 5];
+const mc = [];
+for(let i = 0;i<nuus.length;i++) {
+    const result = mc.some((item) => item == nuus[i]);
+    if(!result) {
+        mc.push(nuus[i]);
+    }
+}
+console.log(mc);
+
+const stsr = "Hello JavaScript World";
+// Viết code để đảo ngược từng từ trong chuỗi
+// Kết quả: "olleH tpircSavaJ dlroW"
+
+console.log(stsr.split(" ").map((item) => item.split("").reverse().join("")).join(" "))
+
+const ddff = [10, 20, 15, 30, 25, 50, 40];
+const ssfd = 27;
+// Viết code để tìm số trong mảng gần nhất với target
+// Kết quả: 25 (vì |25-27| = 2 là nhỏ nhất)
+let min = 100;
+let is;
+for(const item of ddff) {
+    const abs = Math.abs(item - ssfd);
+    if(abs < min) {
+        min = abs;
+        is = item;
+    }
+}
+console.log(is);
+
+function phantich(n) {
+    const nn = {};
+
+    if(n <= 2) {
+        console.log("Khong phan tich")
+    }
+    while(n % 2 === 0) {
+        nn[2] = (nn[2] || 0) + 1;
+        n = n /2;
+    }
+    for(let i = 3; i < n; i = i + 2) {
+        while(n % i === 0) {
+            nn[i] = (nn[i] || 0) + 1;
+            n = n / i;
+        }
+    }
+      if (n > 2) {
+      nn[n] = (nn[n] || 0) + 1;
+  }
+    return nn;
+}
+
+console.log(phantich(80));
+
+const xxx = [10, 22, 28, 29, 30, 40];
+const xa = 58;
+// Viết code để tìm hai số trong mảng có tổng gần nhất với x
+// Kết quả: [22, 30] vì 22+30=52 và |52-54|=2 là nhỏ nhất
+let miin = Infinity;
+let hop = []
+for(let i = 0; i < xxx.length; i++) {
+  for(let j = i + 1; j < xxx.length; j++) {
+    const khoang = Math.abs(xxx[i] + xxx[j] - xa)
+    if(khoang < miin){
+        miin = khoang;
+        hop = [xxx[i],xxx[j]];
+    }
+  }
+}
+console.log(hop);
+
+const scdc = [123, 456, 789, 100, 235];
+// Viết code để đảo ngược các chữ số của số chẵn trong mảng
+// Kết quả: [123, 654, 789, 1, 235]
+
+console.log(scdc.map((item) => {
+    if(item % 2 == 0) {
+      return Number(item.toString().split("").reverse().join(""));
+    }
+    return item;
+}))
+
+function isPerfectNumber(num) {
+  let sum = 0;
+  for(let i = 1;i<num;i++) {
+      if(num % i == 0) {
+        sum = sum + i;
+      }
+  }
+  return sum;
+}
+console.log(isPerfectNumber(6));
+
+const arrassy = [1, 2, 3, 4, 5];
+
+console.log(arrassy.map((_, index) => arrassy[arrassy.length - index - 1]))
+
+
