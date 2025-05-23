@@ -1423,7 +1423,6 @@ const sol = salData.reduce((group,item) => {
         const id = sp.category;
         group[key]["salesCategory"][id] = (group[key]["salesCategory"][id] || 0) + sp.price*sp.quantity;
     })
-    
     return group;
 },[])
 
@@ -1453,7 +1452,7 @@ function isArmstrongNumber(num) {
   while(num !== 0) {
       const du = num % 10;
       sunn = sunn + Math.pow(du,length);
-       num = Math.floor(num / 10);
+      num = Math.floor(num / 10);
   }
   return sunn;
 }
@@ -1583,3 +1582,32 @@ const arrassy = [1, 2, 3, 4, 5];
 console.log(arrassy.map((_, index) => arrassy[arrassy.length - index - 1]))
 
 
+const test = [-2, 1, -3, 4, -1, 2, 1, -5, 4];
+
+let maxCurruent = test[0];
+let maxArr = test[0];
+let start = 0; end = 0; vitri = 0;
+
+for(let i = 1; i < test.length; i++)
+{
+  if(maxCurruent < 0) {
+    maxCurruent = test[i];
+    vitri = i;
+  } else maxCurruent += test[i];
+
+  if(maxCurruent > maxArr) {
+    maxArr = maxCurruent;
+    start = vitri;
+    end = i;
+}
+}
+
+const relt = {array : test.slice(start, end + 1),
+              maxArr : maxArr,
+}
+
+console.log(relt);
+
+const tu = 292;
+
+console.log(tu.toString().split("").reduce((sum,item) => sum + Number(item),0));
